@@ -1,4 +1,5 @@
 import { Logger } from "./logger.js"
+
 export class TelegramBot {
   constructor(token, chatId) {
     this.token = token
@@ -6,9 +7,11 @@ export class TelegramBot {
     this.logger = new Logger()
     this.apiUrl = `https://api.telegram.org/bot${this.token}/sendMessage`
     this.isEnabled = false
+
     // Debug logging
     this.logger.log(`Telegram Bot Token: ${this.token ? this.token.substring(0, 10) + "..." : "NOT SET"}`, "debug")
     this.logger.log(`Telegram Chat ID: ${this.chatId || "NOT SET"}`, "debug")
+
     // Validate credentials
     if (!this.token || !this.chatId || this.token === "YOUR_BOT_TOKEN" || this.chatId === "YOUR_CHAT_ID") {
       this.logger.log(
@@ -23,6 +26,7 @@ export class TelegramBot {
       this.testConnection()
     }
   }
+
   async testConnection() {
     try {
       const url = `https://api.telegram.org/bot${this.token}/getMe`
@@ -30,6 +34,7 @@ export class TelegramBot {
       const response = await fetch(url)
       const data = await response.json()
       this.logger.log(`Telegram API Response: ${JSON.stringify(data)}`, "debug")
+
       if (data.ok) {
         this.logger.log(`Telegram bot connected: @${data.result.username}`, "success")
       } else {
@@ -41,6 +46,7 @@ export class TelegramBot {
       this.isEnabled = false
     }
   }
+
   async sendMessage(message) {
     if (!this.isEnabled) {
       this.logger.log("Telegram bot is disabled - message not sent", "debug")
@@ -48,15 +54,9 @@ export class TelegramBot {
     }
 
     try {
-      // Clean the message and URL encode it
+      // Clean the message and format it
       const cleanMessage = this.cleanMessage(message)
-      const encodedMessage = encodeURIComponent(cleanMessage)
 
-      // Build URL with query parameters
-      const url = `https://api.telegram.org/bot${this.token}/sendMessage?chat_id=${this.chatId}&text=${encodedMessage}`
-
-      const response = await fetch(url, {
-        method: "GET",
       const response = await fetch(this.apiUrl, {
         method: "POST",
         headers: {
@@ -90,15 +90,11 @@ export class TelegramBot {
       return false
     }
   }
+
   async sendPlainMessage(message) {
     try {
       const cleanMessage = this.cleanMessage(message)
-      const encodedMessage = encodeURIComponent(cleanMessage)
 
-      const url = `https://api.telegram.org/bot${this.token}/sendMessage?chat_id=${this.chatId}&text=${encodedMessage}`
-
-      const response = await fetch(url, {
-        method: "GET",
       const response = await fetch(this.apiUrl, {
         method: "POST",
         headers: {
@@ -134,40 +130,39 @@ export class TelegramBot {
       .trim()
       .substring(0, 4000) // Telegram message limit
   }
+
   formatAttackAlert(attack) {
     const timestamp = new Date(attack.timestamp).toLocaleString()
     const severity = attack.severity.toUpperCase()
 
-    return `🚨 TRAPDAEMON ALERT 🚨
-    return `🚨 <b>TRAPDAEMON ALERT</b> 🚨
-🔴 Attack Type: ${attack.type}
-⚠️ Severity: ${severity}
-🌐 Source IP: ${attack.source}
-🎯 Target: ${attack.target}
-📝 Description: ${attack.description}
-⏰ Time: ${timestamp}
-🔴 <b>Attack Type:</b> ${attack.type}
-⚠️ <b>Severity:</b> ${severity}
-🌐 <b>Source IP:</b> <code>${attack.source}</code>
-🎯 <b>Target:</b> ${attack.target}
-📝 <b>Description:</b> ${attack.description}
-⏰ <b>Time:</b> ${timestamp}
-${attack.payload ? `📋 Payload: ${attack.payload.substring(0, 200)}${attack.payload.length > 200 ? "..." : ""}` : ""}
-${attack.payload ? `📋 <b>Payload:</b> <code>${attack.payload.substring(0, 200)}${attack.payload.length > 200 ? "..." : ""}</code>` : ""}
+    return `TRAPDAEMON ALERT
+
+Attack Type: ${attack.type}
+Severity: ${severity}
+Source IP: ${attack.source}
+Target: ${attack.target}
+Description: ${attack.description}
+Time: ${timestamp}
+${attack.payload ? `Payload: ${attack.payload.substring(0, 200)}${attack.payload.length > 200 ? "..." : ""}` : ""}
+
 #TrapDaemon #SecurityAlert #${severity}`
   }
+
   async sendAttackAlert(attack) {
     if (!this.isEnabled) {
       return false
     }
+
     const alertMessage = this.formatAttackAlert(attack)
     return await this.sendMessage(alertMessage)
   }
+
   // Method to enable/disable bot
   setEnabled(enabled) {
     this.isEnabled = enabled
     this.logger.log(`Telegram bot ${enabled ? "enabled" : "disabled"}`, "info")
   }
+
   // Get bot status
   getStatus() {
     return {

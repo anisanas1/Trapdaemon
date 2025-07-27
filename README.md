@@ -49,7 +49,7 @@ This command builds a Docker image named `trapdaemon`. The process might take a 
 
 To run the honeypot, you need to map the exposed ports from the container to your host machine. You also need to provide your Telegram Bot Token and Chat ID as environment variables if you wish to receive alerts.
 
-**Important:** For network monitoring features (like `tcpdump`, `iptables`, and WiFi honeypot capabilities), the Docker container needs to run with elevated privileges.
+**Important:** For network monitoring features (like `tcpdump` and `iptables`), the Docker container needs to run with elevated privileges.
 
 ```bash
 docker run -d \
@@ -104,9 +104,9 @@ Navigate to the root directory of your TrapDaemon project and run:
 npm install
 ```
 
-#### 2. Install Optional System Tools (for enhanced monitoring and WiFi features)
+#### 2. Install Optional System Tools (for enhanced monitoring)
 
-These tools are required for full network monitoring and WiFi honeypot capabilities.
+These tools are required for full network monitoring capabilities.
 
 **For Ubuntu/Debian:**
 
@@ -350,7 +350,7 @@ Check the `logs/` directory for detailed error information:
 │   ├── detection/
 │   │   └── attack-detector.js  # Attack detection engine
 │   ├── network/
-│   │   └── network-manager.js  # Network monitoring and WiFi features
+│   │   └── network-manager.js  # Network monitoring features
 │   ├── utils/
 │   │   ├── logger.js          # Centralized logging system
 │   │   └── telegram-bot.js    # Telegram notification module

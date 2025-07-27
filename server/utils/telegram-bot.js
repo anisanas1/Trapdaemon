@@ -56,22 +56,15 @@ export class TelegramBot {
     }
 
     try {
-      // Clean the message
+      // Clean the message and URL encode it
       const cleanMessage = this.cleanMessage(message)
+      const encodedMessage = encodeURIComponent(cleanMessage)
 
-      // Use POST method with JSON body (recommended approach)
-      const url = `https://api.telegram.org/bot${this.token}/sendMessage`
-      
+      // Build URL with query parameters
+      const url = `https://api.telegram.org/bot${this.token}/sendMessage?chat_id=${this.chatId}&text=${encodedMessage}`
+
       const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: this.chatId,
-          text: cleanMessage,
-          parse_mode: "HTML", // Allow basic HTML formatting
-        }),
+        method: "GET",
       })
 
       const responseData = await response.json()
@@ -95,18 +88,12 @@ export class TelegramBot {
   async sendPlainMessage(message) {
     try {
       const cleanMessage = this.cleanMessage(message)
+      const encodedMessage = encodeURIComponent(cleanMessage)
 
-      const url = `https://api.telegram.org/bot${this.token}/sendMessage`
+      const url = `https://api.telegram.org/bot${this.token}/sendMessage?chat_id=${this.chatId}&text=${encodedMessage}`
 
       const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          chat_id: this.chatId,
-          text: cleanMessage,
-        }),
+        method: "GET",
       })
 
       const responseData = await response.json()
@@ -125,8 +112,10 @@ export class TelegramBot {
   }
 
   cleanMessage(message) {
-    // Clean and format message for Telegram
+    // Remove or replace problematic characters
     return message
+      .replace(/[<>]/g, "") // Remove HTML-like brackets
+      .replace(/[_*[\]()~`>#+=|{}.!-]/g, "") // Remove markdown special chars
       .replace(/\n\n+/g, "\n") // Replace multiple newlines with single
       .trim()
       .substring(0, 4000) // Telegram message limit
@@ -136,16 +125,16 @@ export class TelegramBot {
     const timestamp = new Date(attack.timestamp).toLocaleString()
     const severity = attack.severity.toUpperCase()
 
-    return `🚨 <b>TRAPDAEMON ALERT</b> 🚨
+    return `🚨 TRAPDAEMON ALERT 🚨
 
-🔴 <b>Attack Type:</b> ${attack.type}
-⚠️ <b>Severity:</b> ${severity}
-🌐 <b>Source IP:</b> <code>${attack.source}</code>
-🎯 <b>Target:</b> ${attack.target}
-📝 <b>Description:</b> ${attack.description}
-⏰ <b>Time:</b> ${timestamp}
+🔴 Attack Type: ${attack.type}
+⚠️ Severity: ${severity}
+🌐 Source IP: ${attack.source}
+🎯 Target: ${attack.target}
+📝 Description: ${attack.description}
+⏰ Time: ${timestamp}
 
-${attack.payload ? `📋 <b>Payload:</b> <code>${attack.payload.substring(0, 200)}${attack.payload.length > 200 ? "..." : ""}</code>` : ""}
+${attack.payload ? `📋 Payload: ${attack.payload.substring(0, 200)}${attack.payload.length > 200 ? "..." : ""}` : ""}
 
 #TrapDaemon #SecurityAlert #${severity}`
   }

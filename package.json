@@ -12,6 +12,7 @@
     "honeypot": "node server/honeypot.js",
     "setup": "node setup.js",
     "test": "node test.js",
+    "test-telegram": "node test-telegram.js",
     "check-system": "node check-system.js"
   },
   "dependencies": {

@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #00ff00;
+  --card: #111111;
+  --primary: #ff0000;
+  --secondary: #1a1a1a;
+  --muted: #666666;
+  --border: #333333;
+  --radius: 0.25rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  background-color: var(--background);
+  color: var(--foreground);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page layout */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  flex-grow: 1;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.section-title {
+  color: var(--primary);
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.label {
+  font-weight: bold;
+  color: var(--foreground);
+}
+
+.value {
+  color: var(--foreground);
+}
+
+/* Terminal Log Panel */
+.terminal-logs {
+  background-color: #000;
+  border-top: 1px solid var(--primary);
+  padding: 1rem;
+  font-size: 14px;
+  color: var(--foreground);
+  height: 180px;
+  overflow-y: auto;
+  font-family: "Courier New", "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+/* Buttons */
+.button-bar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.5rem;
+  border-top: 1px solid var(--primary);
+  background-color: #000;
+}
+
+.btn-hacker {
+  border: 1px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  padding: 6px 12px;
+  font-weight: bold;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-family: "Courier New", "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.btn-hacker:hover {
+  background-color: var(--primary);
+  color: var(--background);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+/* Status text */
+.status-ok {
+  color: #00ff00;
+}
+.status-bad {
+  color: #ff0000;
+}
+
+/* Table styles for hacker theme */
+.hacker-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.hacker-table th,
+.hacker-table td {
+  border: 1px solid var(--primary);
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.hacker-table th {
+  background-color: var(--primary);
+  color: var(--background);
+  font-weight: bold;
+}
+
+.hacker-table tr:nth-child(even) {
+  background-color: #111;
+}
+
+/* Severity colors */
+.severity-low {
+  color: #ffff00;
+}
+
+.severity-medium {
+  color: #ff8800;
+}
+
+.severity-high {
+  color: #ff0000;
+}
+
+.severity-critical {
+  color: #ff0000;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff0000;
+}
+
+/* Terminal styles */
+.terminal {
+  font-family: "Courier New", "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  background-color: #000;
+  color: var(--foreground);
+}
+
+.terminal-header {
+  background-color: var(--primary);
+  color: var(--background);
+  padding: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.terminal-content {
+  padding: 1rem;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .button-bar {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .btn-hacker {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}

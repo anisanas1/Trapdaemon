@@ -1,4 +1,3 @@
-(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF'
 diff --git a/README.md b/README.md
 --- a/README.md
 +++ b/README.md
@@ -685,5 +684,3 @@ diff --git a/README.md b/README.md
 +
 +This software is provided for educational and research purposes. Users are responsible for complying with all applicable laws and regulations. The authors are not responsible for any misuse of this software or any damages incurred from its use.
 +
-EOF
-)

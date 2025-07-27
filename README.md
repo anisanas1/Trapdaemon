@@ -229,12 +229,6 @@ Once running:
    - Copy `.env.example` to `.env`
    - Add your bot token and chat ID
 
-4. **Test Your Telegram Setup (Optional):**
-   ```bash
-   npm run test-telegram
-   ```
-   This will verify your Telegram bot configuration and send test messages.
-
 ## Available Scripts
 
 - `npm run dev` - Start Next.js in development mode
@@ -244,7 +238,6 @@ Once running:
 - `npm run honeypot` - Start the honeypot server
 - `npm run setup` - Run interactive setup script
 - `npm run test` - Run test suite
-- `npm run test-telegram` - Test Telegram bot configuration
 - `npm run check-system` - Check system capabilities
 
 ## Security Warning
@@ -313,7 +306,6 @@ Once running:
 
 5.  **Telegram Alerts Not Sending**:
     *   Verify your `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` are correct in your `.env` file.
-    *   Run `npm run test-telegram` to test your Telegram configuration.
     *   Ensure the honeypot server has internet connectivity to reach Telegram's API.
     *   Check the honeypot logs for any errors related to Telegram.
     *   Test your bot configuration by messaging it directly.

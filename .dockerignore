@@ -1,0 +1,13 @@
+node_modules
+logs
+exports
+harvested-data
+tmp
+.git
+.gitignore
+npm-debug.log
+README.md
+start.sh
+setup.js
+test.js
+check-system.js

@@ -1,0 +1,44 @@
+{
+  "name": "trapdaemon-honeypot",
+  "version": "1.0.0",
+  "description": "TrapDaemon - Advanced Honeypot System for Security Research",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "honeypot": "node server/honeypot.js",
+    "setup": "node setup.js",
+    "test": "node test.js",
+    "check-system": "node check-system.js"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "figlet": "^1.8.2",
+    "geoip-lite": "^1.4.10",
+    "gradient-string": "^3.0.0",
+    "leaflet": "^1.9.4",
+    "next": "^14.0.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.2.0",
+    "eslint": "^9.0.0",
+    "lru-cache": "^10.0.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": ["honeypot", "security", "cybersecurity", "pentesting", "trapdaemon"],
+  "author": "AnisAnas",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

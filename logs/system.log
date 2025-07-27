@@ -1,6 +1,0 @@
-{"timestamp":"2025-07-27T02:48:29.762Z","level":"DEBUG","category":"system","message":"Telegram Bot Token: test_token...","pid":2165}
-{"timestamp":"2025-07-27T02:48:29.778Z","level":"DEBUG","category":"system","message":"Telegram Chat ID: test_chat_id","pid":2165}
-{"timestamp":"2025-07-27T02:48:29.778Z","level":"SUCCESS","category":"system","message":"Telegram bot initialized successfully","pid":2165}
-{"timestamp":"2025-07-27T02:48:29.778Z","level":"DEBUG","category":"system","message":"Testing connection to: https://api.telegram.org/bottest_token/getMe","pid":2165}
-{"timestamp":"2025-07-27T02:48:30.313Z","level":"DEBUG","category":"system","message":"Telegram API Response: {\"ok\":false,\"error_code\":404,\"description\":\"Not Found\"}","pid":2165}
-{"timestamp":"2025-07-27T02:48:30.313Z","level":"ERROR","category":"system","message":"Telegram bot connection failed: Not Found","pid":2165}

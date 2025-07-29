@@ -386,4 +386,4 @@ MIT License - See the LICENSE file for details.
 
 ## Disclaimer
 
-This software is provided for educational and research purposes. Users are responsible for complying with all applicable laws and regulations. The authors are not responsible for any misuse of this software or any damages incurred from its use.
+This software is provided for educational and research purposes. Users are responsible for complying with all applicable laws and regulations. As the developper of this tool i do not take responsibility for any misuse of this software or any damages incurred from its use.
